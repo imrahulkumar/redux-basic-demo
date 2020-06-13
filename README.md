@@ -158,6 +158,14 @@ function App() {
 export default App
 ```
 
+### Install the following npm package.
+```shell
+npm install redux --save
+npm install --save  react-redux
+npm i redux-devtools-extension
+npm i redux-logger
+npm i redux-thunk
+```
 
 
 
