@@ -98,6 +98,67 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps,mapDispatchToProps)(CakeContainer)
 ```
 
+##  At the end two most important part of the redux:-
+
+1. We have to create the rootReducer.js file where we can combine all the reducer file to make them availlable.:-
+
+```javascript
+//rootReducer.js
+import { combineReducers } from 'redux'
+import cakeReducer from './cake/cakeReducer' ;   // reducer file 1
+import iceCreamReducer from './iceCream/iceCreamReducer';    // reducer file 2
+import userReducer from './user/userReducer';    // reducer file 3
+
+const rootReducer = combineReducers({
+  cake: cakeReducer,
+  iceCream: iceCreamReducer,
+  user: userReducer
+})
+export default rootReducer
+```
+
+2. In the Second we have to provide this inside store.
+
+```javascript
+//store.js
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+
+import rootReducer from './rootReducer'  // Created above.
+
+const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(logger, thunk)))
+
+export default store
+
+```
+
+3.  At the end wrapped the component inside **Provider** tag and pass the store as above we have created.
+
+```javascript
+import React from 'react'
+import { Provider } from 'react-redux'
+import './App.css'
+import store from './redux/store'    //As we have create above.
+import CakeContainer from './components/CakeContainer'   //component 1
+import HooksCakeContainer from './components/HooksCakeContainer'  //component 2
+
+function App() {
+  return (
+    <Provider store={store}>
+      <div className='App'>
+        <CakeContainer />
+        <HooksCakeContainer />
+      </div>
+    </Provider>
+  )
+}
+
+export default App
+```
+
+
 
 
 
