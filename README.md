@@ -70,9 +70,9 @@ import { connect } from 'react-redux'
 
 Now lets complete the above example from the working of the component that will use the aboue as the redux methods.
 ```javascript
-import React from 'react'
-import { connect } from 'react-redux'
-import { buyCake } from '../redux'
+import React from 'react';
+import { connect } from 'react-redux';
+import { buyCake } from '../redux';    // 'Action' function
 
 function CakeContainer (props) {
   return (
