@@ -1,68 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Redux Integration in React JS
+- First of all add 'Action Type' (Just type of operation you are going to perform for eg. in e-commercial website we have to add the product price so we will make unique name for this  *action type* i.e PRODUCT_ADD).
+- In second step we have to create 'Action' (basically it describe that what is going to happen inside this process).**From component we generally call Action method to process the functionality beacuse it is responsible to run the reduce function. Generally we use the below code to call the functionality from the repective component.***
+```javascript
+   dispatch(addProduct)
+``` 
+- In the End we have to make the 'Reducer'  file where we actually write the logic to perform the operation.
 
-## Available Scripts
 
-In the project directory, you can run:
+######  Lets  discuss the implementation of the reducer in react js with example:-
 
-### `npm start`
+We are making the redux for shop to make the count of the cake after each sell.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+1.  Create the  'Action Type' as discussed.
+```javascript
+//cakeType.js
+export const BUY_CAKE = 'BUY_CAKE'
+```
 
-### `npm test`
+2. Now Create the 'Action'  for the above 'Action Type'.
+```javascript
+//cakeActions.js
+import { BUY_CAKE } from './cakeTypes';
+export const buyCake = (number = 1) => {
+  return {
+    type: BUY_CAKE,
+    payload: number
+       }
+  }
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Now create the 'Reucer' the main logic.
 
-### `npm run build`
+```javascript
+//cakeReducer.js
+import { BUY_CAKE } from './cakeTypes';
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const initialState = {
+  numOfCakes: 10
+}
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+const cakeReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case BUY_CAKE: return {
+      ...state,
+      numOfCakes: state.numOfCakes - action.payload
+    }
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    default: return state
+  }
+}
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+export default cakeReducer
+```
