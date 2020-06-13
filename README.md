@@ -30,7 +30,7 @@ export const buyCake = (number = 1) => {
   }
 ```
 
-3. Now create the 'Reucer' the main logic.
+3. Now create the 'Reducer' the main logic.
 
 ```javascript
 //cakeReducer.js
